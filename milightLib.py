@@ -16,17 +16,17 @@ COMMAND_TEMPERATURE_PREFIX = '31 00 00 08 05' # Kelvin
 COMMAND_WHITE = '31 00 00 08 05 64 00 00 00'
 COMMAND_NIGHT = '31 00 00 08 04 05 00 00 00'
 
-#WW have same but one less in value in two last places
-WW_COMMAND_ON='31 00 00 07 03 01 00 00 00';
-WW_COMMAND_OFF = '31 00 00 07 03 02 00 00 00'
-WW_COMMAND_COLOR_PREFIX = '31 00 00 07 01' #The next 4 are color values
+#W have same but one less in value in two last places
+W_COMMAND_ON='31 00 00 07 03 01 00 00 00';
+W_COMMAND_OFF = '31 00 00 07 03 02 00 00 00'
+W_COMMAND_COLOR_PREFIX = '31 00 00 07 01' #The next 4 are color values
 #SATURATION does not exist
-WW_COMMAND_MODE_PREFIX = '31 00 00 07 04'
-WW_COMMAND_BRIGHTNESS_PREFIX = '31 00 00 07 02'
-WW_COMMAND_SPEED_PREFIX = '31 00 00 07 03' # plus 03 for up, 04 for down
+W_COMMAND_MODE_PREFIX = '31 00 00 07 04'
+W_COMMAND_BRIGHTNESS_PREFIX = '31 00 00 07 02'
+W_COMMAND_SPEED_PREFIX = '31 00 00 07 03' # plus 03 for up, 04 for down
 # TEMPERATURE does not exist
-WW_COMMAND_WHITE = '31 00 00 07 03 05 00 00 00'
-WW_COMMAND_NIGHT = '31 00 00 07 03 06 00 00 00'
+W_COMMAND_WHITE = '31 00 00 07 03 05 00 00 00'
+W_COMMAND_NIGHT = '31 00 00 07 03 06 00 00 00'
 
 class milight:
     def calcChecksum(self, command):
@@ -69,68 +69,68 @@ class milight:
             s.close()
 
     def on(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_ON, zone);
+        if type=='W':
+            self.send(W_COMMAND_ON, zone);
         else:			
             self.send(COMMAND_ON, zone);
         
     def off(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_OFF, zone);
+        if type=='W':
+            self.send(W_COMMAND_OFF, zone);
         else:
             self.send(COMMAND_OFF, zone);
     
     def color(self, type, zone, hexColor):
-        if type=='WW':
-            self.send(WW_COMMAND_COLOR_PREFIX + " " + hexColor + " " + hexColor + " " + hexColor + " " + hexColor, zone);
+        if type=='W':
+            self.send(W_COMMAND_COLOR_PREFIX + " " + hexColor + " " + hexColor + " " + hexColor + " " + hexColor, zone);
         else:			
             self.send(COMMAND_COLOR_PREFIX + " " + hexColor + " " + hexColor + " " + hexColor + " " + hexColor, zone);
         
     def brightness(self, type, zone, brightnessHex):
-        if type=='WW':
-            self.send(WW_COMMAND_BRIGHTNESS_PREFIX + " " + brightnessHex + " 00 00 00 ", zone)            
+        if type=='W':
+            self.send(W_COMMAND_BRIGHTNESS_PREFIX + " " + brightnessHex + " 00 00 00 ", zone)            
         else:			
             self.send(COMMAND_BRIGHTNESS_PREFIX + " " + brightnessHex + " 00 00 00 ", zone)
         
     def saturation(self, type, zone, saturationHex):
-        if type=='WW':
-            self.send(WW_COMMAND_SATURATION_PREFIX + " " + saturationHex + " 00 00 00 ", zone)
+        if type=='W':
+            self.send(W_COMMAND_SATURATION_PREFIX + " " + saturationHex + " 00 00 00 ", zone)
         else:			
             self.send(COMMAND_SATURATION_PREFIX + " " + saturationHex + " 00 00 00 ", zone)
     
     def temperature(self, type, zone, temperatureHex):
-        if type=='WW':
+        if type=='W':
             #not supported?
             return
         else:			
             self.send(COMMAND_TEMPERATURE_PREFIX + " " + saturationHex + " 00 00 00 ", zone)     
  
     def white(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_WHITE, zone)
+        if type=='W':
+            self.send(W_COMMAND_WHITE, zone)
         else:			
             self.send(COMMAND_WHITE, zone)
 		
     def night(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_NIGHT, zone)
+        if type=='W':
+            self.send(W_COMMAND_NIGHT, zone)
         else:			
             self.send(COMMAND_NIGHT, zone)
 		
     def mode(self, type, zone, mode):
-        if type=='WW':
-            self.send(WW_COMMAND_MODE_PREFIX + " " + mode + " 00 00 00 ", zone)
+        if type=='W':
+            self.send(W_COMMAND_MODE_PREFIX + " " + mode + " 00 00 00 ", zone)
         else:			
             self.send(COMMAND_MODE_PREFIX + " " + mode + " 00 00 00 ", zone)
 		
     def speedUp(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_SPEED_PREFIX + " 03 00 00 00", zone)
+        if type=='W':
+            self.send(W_COMMAND_SPEED_PREFIX + " 03 00 00 00", zone)
         else:			
             self.send(COMMAND_SPEED_PREFIX + " 03 00 00 00", zone)
 			
     def speedDown(self, type, zone):
-        if type=='WW':
-            self.send(WW_COMMAND_SPEED_PREFIX + " 04 00 00 00", zone)
+        if type=='W':
+            self.send(W_COMMAND_SPEED_PREFIX + " 04 00 00 00", zone)
         else:			
             self.send(COMMAND_SPEED_PREFIX + " 04 00 00 00", zone)
